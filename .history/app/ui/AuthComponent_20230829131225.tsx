@@ -1,32 +1,36 @@
 "use client";
-import { useAuthProvider } from "app/context/auth";
 import { useRouter } from "next/navigation";
+import { supabaseAuth } from "../lib/constants";
 
-export default function LoginCard({ close }: any) {
-  const { signInWithSpotify, signInWithGoogle, user } = useAuthProvider();
-  const router = useRouter();
+export default function LoginCard({ session }: any) {
+  
+console.log(session)
+
+
+
 
   const handleSignInWithSpotify = async () => {
-   signInWithSpotify();
-   if(!user){
-    router.refresh();
-   }
+  const { data, error } =await supabaseAuth.auth.signInWithOAuth({
+    provider: 'spotify'
+  });
+  console.log(data, error)
+
+   // router.refresh();
   };
 
   const handleSignInWithGoogle = async () => {
-   signInWithGoogle();
-   if(!user){
-    router.refresh();
-   }
+    await supabaseAuth.auth.signInWithOAuth({
+      provider: 'google'
+    });   
+   // router.refresh();
+   
     };
-
 
   return (
     <div className="relative z-[9999999px]">
 
 
       <div className="flex flex-col px-6 py-4 border-b rounded-t dark:border-zinc-600 relative min-w-full w-sm lg:w-full">
-        <div className='cursor-pointer p-2 border dark:border-zinc-700 border-zinc-300 rounded text-sm w-24 text-center text-black dark:text-white bg-white dark:bg-black absolute right-5 top-3' onClick={() => close(false)}>Close</div>
 
         <h3 className="text-base font-semibold text-zinc-900 lg:text-xl dark:text-white">
           Sign in
@@ -61,7 +65,7 @@ export default function LoginCard({ close }: any) {
               </span>
             </div>
           </li>
-          {user &&
+          {session &&
             <li>
               <a
                 href="#"

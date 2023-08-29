@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import LoginCard from './ui/AuthComponent'
 import { supabaseAuth } from './lib/constants'
-import AuthComponent from './ui/AuthComponent2'
+import AuthComponent from './ui/AuthComponent'
 
 export default async function Home() {
   const {data: session} = await supabaseAuth.auth.getSession()

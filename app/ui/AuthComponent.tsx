@@ -5,8 +5,7 @@ import { supabaseAuth } from "../lib/constants";
 export default function LoginCard({ session }: any) {
   
 console.log(session)
-  const router = useRouter();
-  const user = ''
+
 
 
 
@@ -23,7 +22,7 @@ console.log(session)
     await supabaseAuth.auth.signInWithOAuth({
       provider: 'google'
     });   
-    router.refresh();
+   // router.refresh();
    
     };
 
@@ -66,7 +65,7 @@ console.log(session)
               </span>
             </div>
           </li>
-          {user &&
+          {session &&
             <li>
               <a
                 href="#"

@@ -7,16 +7,14 @@ import { cookies } from 'next/headers'
 export default async function Home() {
   const cookieStore = cookies()
   const allCookies = cookieStore.getAll()
-  console.log(allCookies, "MY COOKIES")
+  console.log(allCookies)
   const {data: session} = await supabaseAuth.auth.getSession()
   if (session) {
     console.log(session)
   }
-
-  
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <AuthComponent session={session?.session}/>
+            <AuthComponent session={session}/>
 
     </main>
   )
