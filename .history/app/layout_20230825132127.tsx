@@ -22,12 +22,8 @@ export default async function RootLayout({
   }
   return (
     <html lang="en">
-    <body className={inter.className}>
-        <form>{session && <div>
-          <button formAction={'/api/auth/signout'}>
-          'Logout'
-          </button>
-          </div>}</form>
+=      <body className={inter.className}>
+        <form>{session && 'Logout'}</form>
           {children}</body>
     </html>
   )

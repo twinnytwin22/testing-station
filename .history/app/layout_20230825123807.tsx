@@ -16,19 +16,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const {data: session} = await supabaseAuth.auth.getSession()
-  if (session) {
-    console.log(session)
-  }
+ 
   return (
-    <html lang="en">
-    <body className={inter.className}>
-        <form>{session && <div>
-          <button formAction={'/api/auth/signout'}>
-          'Logout'
-          </button>
-          </div>}</form>
-          {children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
